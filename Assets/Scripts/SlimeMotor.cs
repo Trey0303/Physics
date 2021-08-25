@@ -59,18 +59,18 @@ public class SlimeMotor : MonoBehaviour
             //rb.rotation(offset);
 
             //public static bool Linecast(Vector3 start, Vector3 end, out RaycastHit hitInfo, int layerMask
-            if (Physics.Linecast(transform.position, target.position))
-            {
-                //Debug.Log("blocked");
-                //hop randomly
+            //if (Physics.Linecast(transform.position, target.position))
+            //{
+            //    //Debug.Log("blocked");
+            //    //hop randomly
 
-                float randX = Random.Range(min, max);
-                float randZ = Random.Range(min, max);
-                Vector3 randTarget = new Vector3(randX, 0, randZ);
+            //    float randX = Random.Range(min, max);
+            //    float randZ = Random.Range(min, max);
+            //    Vector3 randTarget = new Vector3(randX, 0, randZ);
 
-                Vector3 randOffset = (randTarget - transform.position);
+            //    Vector3 randOffset = (randTarget - transform.position);
 
-            }
+            //}
 
             //slime jumps a certain amount of seconds
             tempJumpSec = tempJumpSec + Time.deltaTime;

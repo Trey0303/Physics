@@ -316,7 +316,7 @@ GameObject:
   - component: {fileID: 199983424}
   - component: {fileID: 199983427}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: SphereCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -410,7 +410,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d316f4c82177cd04bbc9de9fd8bd7fa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slimeMotor: {fileID: 644996757}
   targetPost: {fileID: 440975707}
 --- !u!1 &208455317
 GameObject:
@@ -1079,7 +1078,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 412787746}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.96, y: 0.84, z: -6.03}
+  m_LocalPosition: {x: -0.94, y: 0.84, z: -6.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1495,7 +1494,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 644996756}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.48, y: 0.84, z: 4.49}
+  m_LocalPosition: {x: -6.09, y: 0.84, z: 4.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2458,7 +2457,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d316f4c82177cd04bbc9de9fd8bd7fa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slimeMotor: {fileID: 0}
   targetPost: {fileID: 0}
 --- !u!65 &1381359704
 BoxCollider:
@@ -3237,7 +3235,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1970546870}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.121476, y: -0.87353945, z: 3.9091096}
+  m_LocalPosition: {x: -8.6, y: -0.87353945, z: 3.9091096}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 743984557}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SlimePost : MonoBehaviour
 {
-    public SlimeMotor slimeMotor;
+    //public SlimeMotor slimeMotor;
 
     public Transform targetPost;
 
@@ -24,8 +24,14 @@ public class SlimePost : MonoBehaviour
     {
         if(other.gameObject.tag == "Slime")
         {
+            //switch slimes target to be slimepost
             Debug.Log("slime is in post range");
-            slimeMotor.target = targetPost;
+            //slimeMotor.target = targetPost;
+            var curSlime = other.GetComponent<SlimeMotor>();
+            if(curSlime != null)
+            {
+                curSlime.target = targetPost;
+            }
         }
     }
 
@@ -33,8 +39,16 @@ public class SlimePost : MonoBehaviour
     {
         if (other.gameObject.tag == "Slime")
         {
+            //switch target back to slimes original target
             Debug.Log("slime is out of post range");
-            slimeMotor.target = slimeMotor.tempTarget;
+            //slimeMotor.target = slimeMotor.tempTarget;
+
+            var curSlime = other.GetComponent<SlimeMotor>();
+
+            if (curSlime != null)
+            {
+                curSlime.target = curSlime.tempTarget;
+            }
         }
     }
 
