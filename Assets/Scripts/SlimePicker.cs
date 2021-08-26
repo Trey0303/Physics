@@ -40,7 +40,7 @@ public class SlimePicker : MonoBehaviour
 
 
 
-            if (Physics.Raycast(ray, out hit, 100))
+            if (Physics.Raycast(ray, out hit, 600))
             {
                 if (hit.collider.tag == "Slime")
                 {
@@ -51,11 +51,21 @@ public class SlimePicker : MonoBehaviour
                     
 
                 }
+                if (hit.collider.tag == "MegaSlime")
+                {
+                    //Debug.Log(hit.collider.tag);
+                    Debug.DrawLine(ray.origin, hit.point);
+                    //Debug.Log("This is a slime");
+                    slime = hit.rigidbody.transform;//saves the current slime position(grabbing the rigidbody will take how whole object that is moving)
+
+
+                }
                 else if (hit.collider.tag == "ground")
                 {
 
                     if (slime != null)
                     {
+                        //Debug.Log("ground hit");
                         slime.position = hit.point;//replaces current slimes position with selected ground position to move to
                         //set slime reference to null so that it doesnt keep the previous slime selected
                         slime = null;//forces player to select a slime again if wanted to be placed somewhere else

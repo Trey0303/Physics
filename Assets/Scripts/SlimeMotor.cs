@@ -29,6 +29,14 @@ public class SlimeMotor : MonoBehaviour
     public float min = 1f;
     public float max = 2f;
 
+    public int happiness = 0;
+    public float pointTimer = 1;
+    public float setPointTimer = 1;
+    public bool focusedOnPost = false;
+    public int requiredPoints = 10;
+    public int points = 0;
+
+
     //public bool grabbed = false;
 
     // Start is called before the first frame update
@@ -43,6 +51,24 @@ public class SlimeMotor : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        //slime growth
+        if (focusedOnPost)
+        {
+            pointTimer = pointTimer - Time.deltaTime;
+            if (pointTimer <= 0)
+            {
+                happiness++;
+                points++;
+                pointTimer = setPointTimer;
+                if (points > requiredPoints)
+                {
+                    points = 0;
+                    gameObject.transform.localScale = new Vector3(happiness / 4, happiness / 4, happiness / 4);
+                }
+            }
+
+        }
+
         float dist = Vector3.Distance(target.position, transform.position);
         if (dist > .7f)
         {

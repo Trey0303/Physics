@@ -438,7 +438,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 208455317}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.85, y: 2.5504165, z: -5.261541}
+  m_LocalPosition: {x: -1.04, y: 3.49, z: -5.261541}
   m_LocalScale: {x: 1.5647103, y: 7.1159, z: 1}
   m_Children: []
   m_Father: {fileID: 909703222}
@@ -992,6 +992,12 @@ MonoBehaviour:
   atTarget: 0
   min: 1
   max: 2
+  happiness: 0
+  pointTimer: 1
+  setPointTimer: 1
+  focusedOnPost: 0
+  requiredPoints: 10
+  points: 0
 --- !u!54 &412787749
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1159,7 +1165,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 440975703}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.73, y: 0.56, z: -0.52}
+  m_LocalPosition: {x: 8.04, y: 0.56, z: -2.4}
   m_LocalScale: {x: 1, y: 1.6095015, z: 1}
   m_Children:
   - {fileID: 302789018}
@@ -1187,7 +1193,7 @@ GameObject:
   - component: {fileID: 569848808}
   m_Layer: 0
   m_Name: Cube (2)
-  m_TagString: Slime
+  m_TagString: MegaSlime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1295,7 +1301,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 642352233}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.57, y: 2.5504165, z: -5.261541}
+  m_LocalPosition: {x: 6.57, y: 3.4900002, z: -5.261541}
   m_LocalScale: {x: 2.1363926, y: 7.1159, z: 1}
   m_Children: []
   m_Father: {fileID: 909703222}
@@ -1408,6 +1414,12 @@ MonoBehaviour:
   atTarget: 0
   min: 1
   max: 2
+  happiness: 0
+  pointTimer: 1
+  setPointTimer: 1
+  focusedOnPost: 0
+  requiredPoints: 10
+  points: 0
 --- !u!54 &644996758
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1549,8 +1561,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 686248332}
   m_LocalRotation: {x: -0, y: -0, z: -0.70710707, w: 0.70710653}
-  m_LocalPosition: {x: 3.8500023, y: 5.300414, z: -5.261541}
-  m_LocalScale: {x: 1.5647103, y: 7.1159, z: 1}
+  m_LocalPosition: {x: 3.2, y: 6.71, z: -5.261541}
+  m_LocalScale: {x: 0.6680687, y: 7.1159, z: 1}
   m_Children: []
   m_Father: {fileID: 909703222}
   m_RootOrder: 6
@@ -1631,7 +1643,7 @@ GameObject:
   - component: {fileID: 743984558}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Slime
+  m_TagString: MegaSlime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1900,7 +1912,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 775109031}
   m_LocalRotation: {x: 0.28962582, y: -0, z: -0, w: 0.95713997}
-  m_LocalPosition: {x: 4.76, y: 14.5, z: -16.2}
+  m_LocalPosition: {x: 4.76, y: 20.7, z: -25.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2084,7 +2096,7 @@ Transform:
   m_GameObject: {fileID: 815229297}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.0102425, y: -0.63882, z: 1.1863489}
-  m_LocalScale: {x: 29.98984, y: 0.7271194, z: 19.33207}
+  m_LocalScale: {x: 29.98984, y: 0.7271194, z: 28.062431}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -2534,7 +2546,7 @@ GameObject:
   - component: {fileID: 1386185889}
   m_Layer: 0
   m_Name: Cube (3)
-  m_TagString: Slime
+  m_TagString: MegaSlime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2642,7 +2654,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1434284100}
   m_LocalRotation: {x: -0, y: -0, z: -0.70710707, w: 0.70710653}
-  m_LocalPosition: {x: 3.8499985, y: 0.8004141, z: -5.261541}
+  m_LocalPosition: {x: 3.19, y: 0.8, z: -5.261541}
   m_LocalScale: {x: 1.5647103, y: 7.1159, z: 1}
   m_Children: []
   m_Father: {fileID: 909703222}
@@ -2724,7 +2736,7 @@ GameObject:
   - component: {fileID: 1442369503}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: Slime
+  m_TagString: MegaSlime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3199,7 +3211,7 @@ GameObject:
   - component: {fileID: 1970546874}
   m_Layer: 0
   m_Name: BigSlime
-  m_TagString: Slime
+  m_TagString: MegaSlime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3227,6 +3239,12 @@ MonoBehaviour:
   atTarget: 0
   min: 1
   max: 2
+  happiness: 0
+  pointTimer: 1
+  setPointTimer: 1
+  focusedOnPost: 0
+  requiredPoints: 10
+  points: 0
 --- !u!4 &1970546872
 Transform:
   m_ObjectHideFlags: 0

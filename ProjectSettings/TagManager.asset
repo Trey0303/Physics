@@ -7,6 +7,7 @@ TagManager:
   - Slime
   - ground
   - Post
+  - MegaSlime
   layers:
   - Default
   - TransparentFX
