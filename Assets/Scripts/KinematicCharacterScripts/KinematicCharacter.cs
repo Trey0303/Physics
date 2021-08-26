@@ -18,8 +18,6 @@ public class KinematicCharacter : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //velocity
-        var velocity = rb.velocity;
 
         //player.transform.position += velocity * Time.deltaTime;
         
@@ -27,8 +25,6 @@ public class KinematicCharacter : MonoBehaviour
         //Input
         Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
-        //Movement
-        rb.MovePosition(player.transform.position + input * Time.deltaTime * speed);
 
         var thisCollider = GetComponent<Collider>();//player collider
 
@@ -40,28 +36,40 @@ public class KinematicCharacter : MonoBehaviour
             //Check when there is a new collider coming into contact with the box
             for (int i = 0; i < hitColliders.Length; i++)
             {
+                if (hitColliders[i] == thisCollider)
+                {
+                    continue;
+                }
+
                 //Output all of the collider names
                 Debug.Log("Hit : " + hitColliders[i].name + i);
 
                 Vector3 otherPosition = hitColliders[i].transform.position;//gets objects position
                 Quaternion otherRotation = hitColliders[i].transform.rotation;//gets objects rotation
-                //
-                //how far it needs to move
-                var disDir = otherPosition - player.transform.position;
-                disDir.y = 0;
-                float distance = disDir.magnitude;
-                Vector3 direction = disDir / distance;
 
+                float distance;
+                Vector3 direction;
+
+                //ComputePenetration works as a bool to know when the player is or isnt inside an object. Also give you the distance and direction between player and object
+                //                                           object A collider, object A position, object A rotation, object b collider, object b position, object b rotation, MTV(minimum translation vector)
                 bool overlapped = Physics.ComputePenetration(thisCollider, transform.position, transform.rotation, hitColliders[i], otherPosition, otherRotation, out direction, out distance);
 
+                //if player is gonna overlap with object
                 if (overlapped)
                 {
-                    Debug.DrawLine(otherPosition, direction * distance);
+                    Debug.DrawRay(player.transform.position, direction * distance);
+                    //position = position + direction * distance
+                    player.transform.position += direction * distance;//pushes back player by direction times distance and adding to players current position
+
+                    //                                        (vector, planeNormal)
+                    Vector3 clippingVelocity = Vector3.ProjectOnPlane(player.transform.position, direction);
                 }
             }
 
 
         }
+        //Movement
+        rb.MovePosition(player.transform.position + input * Time.deltaTime * speed);
 
     }
 }
