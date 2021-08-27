@@ -6,14 +6,17 @@ public class KinematicCharacter : MonoBehaviour
 {
     public GameObject player;
     public Rigidbody rb;
-    public float speed = 5;
+    public float speed = 5f;
     public float skinWidth = .001f;
     Vector3 velocity;
 
     public bool gravity = false;
     public bool isGrounded = false;
 
-    public int jumpStrength = 10;
+    //public int jumpStrength = 10;
+    public float jumpHeight = 5f;
+    public float maxGroundAngle = 60f;
+    //public float jumpSpeed = 5;
 
     Vector3 playerSize;
 
@@ -32,8 +35,10 @@ public class KinematicCharacter : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 Debug.Log("Jump");
-                rb.AddForce(transform.up * jumpStrength);
+                transform.Translate(Vector3.up * jumpHeight * Time.deltaTime);
+                isGrounded = false;
             }
+            
         }
     }
 
@@ -95,6 +100,20 @@ public class KinematicCharacter : MonoBehaviour
                     //                               (vector, planeNormal)
                     velocity = Vector3.ProjectOnPlane(velocity, direction);
 
+                }
+
+                if (hitColliders[i].tag == "Ground" && isGrounded == false)
+                {
+                    if (hitColliders[i].transform.rotation.x <= maxGroundAngle && hitColliders[i].transform.rotation.z <= maxGroundAngle)
+                    {
+                        Debug.Log("Player touched Ground");
+                        isGrounded = true;
+                    }
+                    
+                }
+                if (hitColliders[i].transform.rotation.x > maxGroundAngle || hitColliders[i].transform.rotation.z > maxGroundAngle)
+                {
+                    isGrounded = false;
                 }
             }
 

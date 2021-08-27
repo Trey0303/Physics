@@ -8,6 +8,7 @@ TagManager:
   - ground
   - Post
   - MegaSlime
+  - Ground
   layers:
   - Default
   - TransparentFX
