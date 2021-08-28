@@ -16,7 +16,7 @@ public class ProjectileMover : MonoBehaviour
         timeSinceLaunch = Time.time;
 
         //overwrites local position of child gameObject with launchVelocity, Gravity, timeSinceLaunch
-        child.transform.localPosition = new Vector3(launchVelocity.x,gravity,launchVelocity.z);
+        child.transform.localPosition = new Vector3(launchVelocity.x * timeSinceLaunch,gravity,launchVelocity.z);
     }
 
     // Update is called once per frame
