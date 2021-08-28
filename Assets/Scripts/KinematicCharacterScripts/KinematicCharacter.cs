@@ -16,6 +16,7 @@ public class KinematicCharacter : MonoBehaviour
     //public int jumpStrength = 10;
     public float jumpHeight = 5f;
     public float maxGroundAngle = 60f;
+    private bool jump = false;
     //public float jumpSpeed = 5;
 
     Vector3 playerSize;
@@ -35,7 +36,8 @@ public class KinematicCharacter : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 Debug.Log("Jump");
-                transform.Translate(Vector3.up * jumpHeight * Time.deltaTime);
+                jump = true;
+                
                 isGrounded = false;
             }
             
@@ -46,10 +48,15 @@ public class KinematicCharacter : MonoBehaviour
     void FixedUpdate()
     {
         //update Velocity
-        player.transform.position += velocity * Time.deltaTime;
+        //player.transform.position += velocity * Time.deltaTime;
        
         //Input
         Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        if (jump)
+        {
+            velocity += new Vector3(0, jumpHeight, 0);
+            jump = false;
+        }
         
 
         //gravity
@@ -59,7 +66,7 @@ public class KinematicCharacter : MonoBehaviour
         }
 
         //projected position
-        Vector3 projectedPosition = player.transform.position + input * Time.deltaTime * speed;
+        Vector3 projectedPosition = player.transform.position + (velocity + input) * Time.deltaTime * speed;
 
         var thisCollider = GetComponent<Collider>();//player collider
 
@@ -93,28 +100,33 @@ public class KinematicCharacter : MonoBehaviour
                 //if player is gonna overlap with object
                 if (overlapped)
                 {
-                    Debug.DrawRay(player.transform.position, direction * distance);
+                    //Debug.DrawRay(player.transform.position, direction * distance);
                     //position = position + direction * distance
                     projectedPosition += direction * distance;//pushes back player by direction times distance and adding to players current position
 
                     //                               (vector, planeNormal)
                     velocity = Vector3.ProjectOnPlane(velocity, direction);
 
-                }
+                    float angle = Vector3.Angle(direction, Vector3.up);
+                    Debug.Log("angle: " + angle);
 
-                if (hitColliders[i].tag == "Ground" && isGrounded == false)
-                {
-                    if (hitColliders[i].transform.rotation.x <= maxGroundAngle && hitColliders[i].transform.rotation.z <= maxGroundAngle)
+                    if (angle < maxGroundAngle)
                     {
-                        Debug.Log("Player touched Ground");
+                        projectedPosition.y += direction.y * distance;
+                        velocity = new Vector3(0f, velocity.y, 0f);
+
+                        Debug.Log("walkable slope");
                         isGrounded = true;
                     }
-                    
+                    else//if slope too steep
+                    {
+                        Debug.Log("too steep a slope");
+                        isGrounded = false;
+                    }
+
                 }
-                if (hitColliders[i].transform.rotation.x > maxGroundAngle || hitColliders[i].transform.rotation.z > maxGroundAngle)
-                {
-                    isGrounded = false;
-                }
+
+                
             }
 
 

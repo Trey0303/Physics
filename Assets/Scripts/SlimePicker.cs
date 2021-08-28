@@ -66,7 +66,7 @@ public class SlimePicker : MonoBehaviour
                     if (slime != null)
                     {
                         //Debug.Log("ground hit");
-                        slime.position = hit.point;//replaces current slimes position with selected ground position to move to
+                        slime.position = new Vector3(hit.point.x, hit.point.y + 1f, hit.point.z);//replaces current slimes position with selected ground position to move to
                         //set slime reference to null so that it doesnt keep the previous slime selected
                         slime = null;//forces player to select a slime again if wanted to be placed somewhere else
                     }
