@@ -36,7 +36,9 @@ public class SlimeMotor : MonoBehaviour
     public int requiredPoints = 10;
     public int points = 0;
 
-    
+    //RaycastHit hit;
+    //float dist;
+    //Vector3 dir;
 
 
     //public bool grabbed = false;
@@ -83,30 +85,23 @@ public class SlimeMotor : MonoBehaviour
             Vector3 offset = (target.position - transform.position).normalized * jumpHorizontally;
             //set the y axis to a vertical force.
             offset.y = jumpVertically;
-            //transform.rotation = Quaternion.Lerp(transform.rotation, target.rotation, Time.deltaTime * speed);
-            //rb.rotation(offset);
-
-            //public static bool Linecast(Vector3 start, Vector3 end, out RaycastHit hitInfo, int layerMask
-            //if (Physics.Linecast(transform.position, target.position))
-            //{
-            //    //Debug.Log("blocked");
-            //    //hop randomly
-
-            //    float randX = Random.Range(min, max);
-            //    float randZ = Random.Range(min, max);
-            //    Vector3 randTarget = new Vector3(randX, 0, randZ);
-
-            //    Vector3 randOffset = (randTarget - transform.position);
-
-            //}
+            
 
             //slime jumps a certain amount of seconds
             tempJumpSec = tempJumpSec + Time.deltaTime;
             if (tempJumpSec >= jumpSeconds)
             {
-                //use offset to add force to rigidbody of slime
-                rb.AddForce(offset, ForceMode.Impulse);
-                tempJumpSec = 0;
+                //check for ground collision
+                bool grounded = (Physics.Raycast(transform.position, Vector3.down, 1f, LayerMask.NameToLayer("Ground"))); // raycast down to look for ground is not detecting ground? only works if allowing jump when grounded = false; // return "Ground" layer as layer
+
+                if (grounded)
+                {
+                    Debug.Log("JUMP");
+                    //use offset to add force to rigidbody of slime
+                    rb.AddForce(offset, ForceMode.Impulse);
+                    tempJumpSec = 0;
+                }
+                
             }
 
         }

@@ -88,7 +88,8 @@ public class ProjectileMover : MonoBehaviour
 
                     float verticalImpulse = (hit.point.y + 0.5f * -Physics.gravity.y * timeItWillTake * timeItWillTake - slime.position.y) / timeItWillTake;
 
-                    rb.AddForce(new Vector3(disX, verticalImpulse, disZ), ForceMode.Impulse);
+                    //rb.AddForce(new Vector3(disX, verticalImpulse, disZ), ForceMode.Impulse);
+                    rb.velocity = (new Vector3(disX, verticalImpulse, disZ));
 
                     Debug.DrawRay(slime.position, Vector3.up, Color.green, 2.0f);
                     Debug.DrawRay(hit.point, Vector3.up, Color.red, 2.0f);
