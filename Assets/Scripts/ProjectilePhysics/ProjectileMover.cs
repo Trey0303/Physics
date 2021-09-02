@@ -11,7 +11,7 @@ public class ProjectileMover : MonoBehaviour
     //public Vector3 launchVelocity;//inital velocity
     //public Vector3 gravity;//
     public float timeItWillTake = 1;// time interval
-    public float mass;
+    //public float mass;
 
     //raycast
     public Camera cam;
@@ -26,7 +26,7 @@ public class ProjectileMover : MonoBehaviour
     void Start()
     {
         //timeItWillTake = Time.time;
-        mass = rb.mass;
+        //mass = rb.mass;
 
         //overwrites local position of child gameObject with launchVelocity, Gravity, timeSinceLaunch
         //x = (speed/initial horizontal launch force * time interval)
@@ -62,7 +62,9 @@ public class ProjectileMover : MonoBehaviour
                 //Debug.Log(hit.collider.tag);
                 Debug.DrawLine(ray.origin, hit.point);
                 Debug.Log("This is a slime");
-                slime = hit.rigidbody.transform;//saves the current slime position(grabbing the rigidbody will take how whole object that is moving)
+                slime = hit.transform.gameObject.transform;//saves the current slime position(grabbing the rigidbody will take the whole object that is moving)
+                rb = slime.GetComponent<Rigidbody>();//grabs selected slime rigidbody
+
 
             }
             if (hit.collider.tag == "MegaSlime")
@@ -71,8 +73,8 @@ public class ProjectileMover : MonoBehaviour
                 //Debug.Log(hit.collider.tag);
                 Debug.DrawLine(ray.origin, hit.point);
                 Debug.Log("This is a slime");
-                slime = hit.rigidbody.transform;//saves the current slime position(grabbing the rigidbody will take how whole object that is moving)
-
+                slime = hit.rigidbody.transform;//saves the current slime position(grabbing the rigidbody will take the whole object that is moving)
+                rb = slime.GetComponent<Rigidbody>();//grabs selected slime rigidbody
 
             }
             else if (hit.collider.tag == "ground")

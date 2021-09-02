@@ -103,7 +103,15 @@ public class SlimePicker : MonoBehaviour
                     
 
                 }
+                if (hitCollider.gameObject.tag == "MegaSlime")
+                {
+                    //slime gets hit by explosion
+                    Debug.Log("Slime Explosion");
+                    rb.AddExplosionForce(explosionStrength, center, radius, upwardsModifier, ForceMode.Impulse);
 
+
+
+                }
 
             }
         }

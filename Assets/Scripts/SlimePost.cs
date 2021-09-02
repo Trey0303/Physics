@@ -51,6 +51,7 @@ public class SlimePost : MonoBehaviour
             if (curSlime != null)
             {
                 curSlime.target = curSlime.tempTarget;
+                curSlime.focusedOnPost = false;
                 //focusedOnPost = false;
             }
         }
@@ -65,6 +66,7 @@ public class SlimePost : MonoBehaviour
             if (curSlime != null)
             {
                 curSlime.target = curSlime.tempTarget;
+                curSlime.focusedOnPost = false;
                 //focusedOnPost = false;
             }
         }
