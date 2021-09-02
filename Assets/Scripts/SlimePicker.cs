@@ -25,12 +25,6 @@ public class SlimePicker : MonoBehaviour
     public float explosionStrength = 5;
     public float upwardsModifier = 7f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -48,7 +42,6 @@ public class SlimePicker : MonoBehaviour
                     Debug.DrawLine(ray.origin, hit.point);
                     //Debug.Log("This is a slime");
                     slime = hit.rigidbody.transform;//saves the current slime position(grabbing the rigidbody will take how whole object that is moving)
-                    
 
                 }
                 if (hit.collider.tag == "MegaSlime")

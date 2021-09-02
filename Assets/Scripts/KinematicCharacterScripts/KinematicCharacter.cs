@@ -108,19 +108,19 @@ public class KinematicCharacter : MonoBehaviour
                     velocity = Vector3.ProjectOnPlane(velocity, direction);
 
                     float angle = Vector3.Angle(direction, Vector3.up);
-                    Debug.Log("angle: " + angle);
+                    //Debug.Log("angle: " + angle);
 
                     if (angle < maxGroundAngle)
                     {
                         projectedPosition.y += direction.y * distance;
                         velocity = new Vector3(0f, velocity.y, 0f);
 
-                        Debug.Log("walkable slope");
+                        //Debug.Log("walkable slope");
                         isGrounded = true;
                     }
                     else//if slope too steep
                     {
-                        Debug.Log("too steep a slope");
+                        //Debug.Log("too steep a slope");
                         isGrounded = false;
                     }
 

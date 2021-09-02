@@ -22,7 +22,7 @@ public class SlimePen : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Slime")
+        if(other.gameObject.tag == "Slime" || other.gameObject.tag == "MegaSlime")
         {
             count++;
             //Debug.Log("A slime has entered the pen");
@@ -31,7 +31,7 @@ public class SlimePen : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Slime")
+        if (other.gameObject.tag == "Slime" || other.gameObject.tag == "MegaSlime")
         {
             count--;
             //Debug.Log("A slime has left the pen");

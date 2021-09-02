@@ -36,6 +36,8 @@ public class SlimeMotor : MonoBehaviour
     public int requiredPoints = 10;
     public int points = 0;
 
+    
+
 
     //public bool grabbed = false;
 

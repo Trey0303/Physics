@@ -8,26 +8,12 @@ public class SlimePost : MonoBehaviour
 
     public Transform targetPost;
 
-    
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Slime")
         {
             //switch slimes target to be slimepost
-            Debug.Log("slime is in post range");
+            //Debug.Log("slime is in post range");
             //slimeMotor.target = targetPost;
             var curSlime = other.GetComponent<SlimeMotor>();//works with small slime because they dont have child colliders to depend on
             if(curSlime != null)//if slime has slimemotor script
@@ -40,7 +26,7 @@ public class SlimePost : MonoBehaviour
         else if (other.gameObject.tag == "MegaSlime")
         {
             //switch slimes target to be slimepost
-            Debug.Log("MegaSlime is in post range");
+            //Debug.Log("MegaSlime is in post range");
             //slimeMotor.target = targetPost;
             var curSlime = other.transform.parent.GetComponent<SlimeMotor>();//works with finding the parent of child objects
             if (curSlime != null)//if slime has slimemotor script
@@ -57,7 +43,7 @@ public class SlimePost : MonoBehaviour
         if (other.gameObject.tag == "Slime")
         {
             //switch target back to slimes original target
-            Debug.Log("MegaSlime is out of post range");
+            //Debug.Log("MegaSlime is out of post range");
             //slimeMotor.target = slimeMotor.tempTarget;
 
             var curSlime = other.GetComponent<SlimeMotor>();
@@ -71,7 +57,7 @@ public class SlimePost : MonoBehaviour
         else if (other.gameObject.tag == "MegaSlime")
         {
             //switch target back to slimes original target
-            Debug.Log("slime is out of post range");
+            //Debug.Log("slime is out of post range");
             //slimeMotor.target = slimeMotor.tempTarget;
 
             var curSlime = other.transform.parent.GetComponent<SlimeMotor>();
