@@ -9,6 +9,9 @@ TagManager:
   - Post
   - MegaSlime
   - Ground
+  - Gate
+  - LeftGate
+  - RightGate
   layers:
   - Default
   - TransparentFX

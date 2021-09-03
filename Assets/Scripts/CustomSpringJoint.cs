@@ -2,8 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class slimeGate : MonoBehaviour
+public class CustomSpringJoint : MonoBehaviour
 {
+    //hooke's law
+    //f = -kx
+
+    public Rigidbody connectedRigidbody;
+
+    public float springTightness = 1;
+
     // Start is called before the first frame update
     void Start()
     {
