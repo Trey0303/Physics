@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraSwitch : MonoBehaviour
 {
+    public KinematicCharacter player;
     public Camera cam1;
 
     public Camera cam2;
@@ -13,16 +14,18 @@ public class CameraSwitch : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (camSwap)
+        if (camSwap)//player cam
         {
             cam1.enabled = true;
             cam2.enabled = false;
+            player.playerCam = true;
 
         }
-        else if (!camSwap)
+        else if (!camSwap)//overview cam
         {
             cam1.enabled = false;
             cam2.enabled = true;
+            player.playerCam = false;
 
         }
     }
@@ -37,14 +40,16 @@ public class CameraSwitch : MonoBehaviour
                 cam1.enabled = false;
                 cam2.enabled = true;
                 camSwap = false;
-                
+                player.playerCam = false;
+
             }
             else if (!camSwap)
             {
                 cam1.enabled = true;
                 cam2.enabled = false;
                 camSwap = true;
-                
+                player.playerCam = true;
+
             }
         }
     }
