@@ -21,19 +21,22 @@ public class CustomSpringJoint : MonoBehaviour
     public Rigidbody connectedRigidbody;
     private Vector3 restPosition;
 
+    //hookes law
+    public Vector3 spring;//The spring force used to keep the two objects together.
+    public float tightness;//The maximum allowed error between the current spring length and the length defined by minDistance and maxDistance.
+    public Vector3 displacement;
+
+    //damper
     public float damper;//The damper force used to dampen the spring force.
     public float maxDistance;//The maximum distance between the bodies relative to their initial distance.
     public float minDistance;//The minimum distance between the bodies relative to their initial distance.
-    public float spring;//The spring force used to keep the two objects together.
-    public float tolerance;//The maximum allowed error between the current spring length and the length defined by minDistance and maxDistance.
-    public float displacement;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
 
-        tolerance = minDistance + maxDistance;
+        tightness = minDistance + maxDistance;
 
         if (connectedRigidbody == null)//if there is no object connected
         {
@@ -51,12 +54,20 @@ public class CustomSpringJoint : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (connectedRigidbody != null)
+        {
+            restPosition = connectedRigidbody.transform.position;
+        }
+
         //                      collider 1, collider 2, bool ignore
         Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), connectedRigidbody.GetComponent<Collider>(), true);
 
-        displacement = restPosition - transform.position;
+        //
+        displacement = transform.position - restPosition;
 
         //f = -kx-bv
-        spring = (-tolerance * displacement) - damper * rb.velocity;
+        spring = -(tightness * displacement) - damper * rb.velocity;
+
+        rb.AddForce(spring);
     }
 }

@@ -35,6 +35,7 @@ public class SlimeMotor : MonoBehaviour
     public bool focusedOnPost = false;
     public int requiredPoints = 10;
     public int points = 0;
+    private bool maxSize;
 
     //RaycastHit hit;
     //float dist;
@@ -59,17 +60,22 @@ public class SlimeMotor : MonoBehaviour
         if (focusedOnPost)
         {
             pointTimer = pointTimer - Time.deltaTime;
-            if (pointTimer <= 0)
+            if (!maxSize)
             {
-                happiness++;
-                points++;
-                pointTimer = setPointTimer;
-                if (points > requiredPoints)
+                if (pointTimer <= 0)
                 {
-                    points = 0;
-                    gameObject.transform.localScale = new Vector3(happiness / 4, happiness / 4, happiness / 4);
+                    happiness++;
+                    points++;
+                    pointTimer = setPointTimer;
+                    if (points > requiredPoints)
+                    {
+                        points = 0;
+                        gameObject.transform.localScale = new Vector3(happiness / 4, happiness / 4, happiness / 4);
+                        maxSize = true;
+                    }
                 }
             }
+            
 
         }
 
