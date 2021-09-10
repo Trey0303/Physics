@@ -7,7 +7,7 @@ using System;
 public class SlimeMotor : MonoBehaviour
 {
     //public SlimePicker slimePicker;
-    public ChildSlime childSlime;
+    //public ChildSlime childSlime;
     public Rigidbody rb;
     //public GameObject slime;
     public Transform target;
@@ -36,7 +36,7 @@ public class SlimeMotor : MonoBehaviour
     public bool focusedOnPost = false;
     public int requiredPoints = 10;
     public int points = 0;
-    private bool maxSize;
+    public bool maxSize;
 
     //RaycastHit hit;
     //float dist;
@@ -89,25 +89,24 @@ public class SlimeMotor : MonoBehaviour
             if (tempJumpSec >= jumpSeconds)
             {
                 //check for ground collision
-                bool grounded = (Physics.Raycast(transform.position, Vector3.down, 1f));
+                bool grounded = (Physics.Raycast(transform.position, Vector3.down, 2f));
 
                 if (grounded)
                 {
-                    //Debug.Log("JUMP");
+                    Debug.Log("JUMP");
                     //use offset to add force to rigidbody of slime
                     rb.AddForce(offset, ForceMode.Impulse);
                     tempJumpSec = 0;
-
-                    if (childSlime != null)
-                    {
-                        if (childSlime.shouldJump)
-                        {
-                            //Debug.Log("MegaJUMP");
-                            var curSlime = transform.parent.GetComponent<SlimeMotor>();
-                            curSlime.rb.AddForce(offset, ForceMode.Impulse);
-                            tempJumpSec = 0;
-                        }
-                    }
+                    //else if (childSlime != null)//if its a megaslime
+                    //{
+                    //    if (childSlime.shouldJump)
+                    //    {
+                    //        //Debug.Log("MegaJUMP");
+                    //        var curSlime = transform.parent.GetComponent<SlimeMotor>();
+                    //        curSlime.rb.AddForce(offset, ForceMode.Impulse);
+                    //        tempJumpSec = 0;
+                    //    }
+                    //}
 
                 }
 
@@ -139,6 +138,7 @@ public class SlimeMotor : MonoBehaviour
                 points = 0;
                 gameObject.transform.localScale = new Vector3(happiness / 4, happiness / 4, happiness / 4);
                 maxSize = true;
+                target = tempTarget;
             }
         }
     }

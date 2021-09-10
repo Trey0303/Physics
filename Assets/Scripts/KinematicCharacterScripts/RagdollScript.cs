@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,58 +31,67 @@ public class RagdollScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
         //player falls over
         if (playerController.playerCam == true)
         {
             if (ragdoll)
             {
-                Debug.Log("kinematic on");
-
-                foreach (Rigidbody rbChild in rbChildren)
-                {
-                    //Debug.Log("test");
-                    rbChild.isKinematic = true;
-                    Debug.Log(rbChild.isKinematic);
-                }
-                for (int i = 0; i < children.Length; i++)
-                {
-                    //Debug.Log("test");
-                    children[i].transform.position = lastposition[i];
-                    children[i].transform.rotation = lastRotation[i];
-                }
-                ragdoll = false;
-
+                FallOver();
             }
-
-            cam.transform.position = new Vector3(target.position.x, target.position.y, target.position.z);
-            cam.transform.LookAt(player);
-
-
-            //playerController.playerCam = false;
+            CamFollowPlayer();
+            
         }
         else if (playerController.playerCam == false)//stand player back up
         {
             if (!ragdoll)
             {
-                Debug.Log("kinematic off");
-
-
-                foreach (Rigidbody rbChild in rbChildren)
-                {
-                    //Debug.Log("test");
-                    rbChild.isKinematic = false;
-                    Debug.Log(rbChild.isKinematic);
-                }
-                for (int i = 0; i < children.Length; i++)
-                {
-                    //Debug.Log("test");
-                    lastposition[i] = children[i].transform.position;
-                    lastRotation[i] = children[i].transform.rotation;
-                }
-                ragdoll = true;
+                StandUp();
+                
             }
         }
+    }
 
+    private void CamFollowPlayer()
+    {
+        cam.transform.position = new Vector3(target.position.x, target.position.y, target.position.z);
+        cam.transform.LookAt(player);
+    }
+
+    private void StandUp()
+    {
+        //Debug.Log("kinematic off");
+
+        foreach (Rigidbody rbChild in rbChildren)
+        {
+            //Debug.Log("test");
+            rbChild.isKinematic = false;
+            //Debug.Log(rbChild.isKinematic);
+        }
+        for (int i = 0; i < children.Length; i++)
+        {
+            //Debug.Log("test");
+            lastposition[i] = children[i].transform.position;
+            lastRotation[i] = children[i].transform.rotation;
+        }
+        ragdoll = true;
+    }
+
+    private void FallOver()
+    {
+        //Debug.Log("kinematic on");
+
+        foreach (Rigidbody rbChild in rbChildren)
+        {
+            //Debug.Log("test");
+            rbChild.isKinematic = true;
+            //Debug.Log(rbChild.isKinematic);
+        }
+        for (int i = 0; i < children.Length; i++)
+        {
+            //Debug.Log("test");
+            children[i].transform.position = lastposition[i];
+            children[i].transform.rotation = lastRotation[i];
+        }
+        ragdoll = false;
     }
 }

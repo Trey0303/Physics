@@ -14,20 +14,7 @@ public class CameraSwitch : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (camSwap)//player cam
-        {
-            cam1.enabled = true;
-            cam2.enabled = false;
-            player.playerCam = true;
-
-        }
-        else if (!camSwap)//overview cam
-        {
-            cam1.enabled = false;
-            cam2.enabled = true;
-            player.playerCam = false;
-
-        }
+        StartingCam();
     }
 
     // Update is called once per frame
@@ -35,6 +22,12 @@ public class CameraSwitch : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
+            SwapCam();
+        }
+    }
+
+    void SwapCam(){
+        
             if (camSwap)
             {
                 cam1.enabled = false;
@@ -51,6 +44,23 @@ public class CameraSwitch : MonoBehaviour
                 player.playerCam = true;
 
             }
+    }
+
+    void StartingCam()
+    {
+        if (camSwap)//player cam
+        {
+            cam1.enabled = true;
+            cam2.enabled = false;
+            player.playerCam = true;
+
+        }
+        else if (!camSwap)//overview cam
+        {
+            cam1.enabled = false;
+            cam2.enabled = true;
+            player.playerCam = false;
+
         }
     }
 }

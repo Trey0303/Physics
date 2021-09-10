@@ -8,6 +8,7 @@ using UnityEditor;
 //This script will allow you to pickup a slime using left mouse click
 public class SlimePicker : MonoBehaviour
 {
+    public KinematicCharacter player;
     public SlimeMotor slimeMotor;
 
     public Rigidbody rb;
@@ -25,63 +26,39 @@ public class SlimePicker : MonoBehaviour
     public float explosionStrength = 5;
     public float upwardsModifier = 7f;
 
+    Quaternion originalRotation;
+
+    void Start()
+    {
+        originalRotation = transform.rotation;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))//left click
+        if (player.playerCam == false)
         {
-            ray = cam.ScreenPointToRay(Input.mousePosition);
-
-
-
-            if (Physics.Raycast(ray, out hit, 600))
+            if (Input.GetMouseButtonDown(0))//left click
             {
-                if (hit.collider.tag == "Slime")
-                {
-                    //Debug.Log(hit.collider.tag);
-                    Debug.DrawLine(ray.origin, hit.point);
-                    //Debug.Log("This is a slime");
-                    slime = hit.rigidbody.transform;//saves the current slime position(grabbing the rigidbody will take how whole object that is moving)
-
-                }
-                if (hit.collider.tag == "MegaSlime")
-                {
-                    //Debug.Log(hit.collider.tag);
-                    Debug.DrawLine(ray.origin, hit.point);
-                    //Debug.Log("This is a slime");
-                    slime = hit.rigidbody.transform;//saves the current slime position(grabbing the rigidbody will take how whole object that is moving)
-
-
-                }
-                else if (hit.collider.tag == "ground")
-                {
-
-                    if (slime != null)
-                    {
-                        //Debug.Log("ground hit");
-                        slime.position = new Vector3(hit.point.x, hit.point.y + 1f, hit.point.z);//replaces current slimes position with selected ground position to move to
-                        //set slime reference to null so that it doesnt keep the previous slime selected
-                        slime = null;//forces player to select a slime again if wanted to be placed somewhere else
-                    }
-
-
-                }
-
+                SlimeSelect();
+                
+            }
+            else if (Input.GetMouseButtonDown(1))//right click
+            {
+                ExplodeSlime();
             }
         }
-        else if (Input.GetMouseButtonDown(1))//right click
+    }
+
+    void ExplodeSlime()
+    {
+        ray = cam.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hit, 100))
         {
             ray = cam.ScreenPointToRay(Input.mousePosition);
 
-
-
-            if (Physics.Raycast(ray, out hit, 100))
-            {
-                ray = cam.ScreenPointToRay(Input.mousePosition);
-
-                ExplosionDamage(hit.point, explosionRadius);
-            }
-
+            ExplosionDamage(hit.point, explosionRadius);
         }
     }
 
@@ -99,8 +76,6 @@ public class SlimePicker : MonoBehaviour
                     //slime gets hit by explosion
                     Debug.Log("Slime Explosion");
                     rb.AddExplosionForce(explosionStrength, center, radius, upwardsModifier, ForceMode.Impulse);
-                    
-                    
 
                 }
                 if (hitCollider.gameObject.tag == "MegaSlime")
@@ -109,14 +84,48 @@ public class SlimePicker : MonoBehaviour
                     Debug.Log("Slime Explosion");
                     rb.AddExplosionForce(explosionStrength, center, radius, upwardsModifier, ForceMode.Impulse);
 
-
-
                 }
-
             }
         }
-        
-        
+    }
+
+
+    void SlimeSelect()
+    {
+        ray = cam.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hit, 600))
+        {
+            if (hit.collider.tag == "Slime")
+            {
+                //Debug.Log(hit.collider.tag);
+                Debug.DrawLine(ray.origin, hit.point);
+                //Debug.Log("This is a slime");
+                slime = hit.rigidbody.transform;//saves the current slime position(grabbing the rigidbody will take how whole object that is moving)
+                
+
+            }
+            if (hit.collider.tag == "MegaSlime")
+            {
+                //Debug.Log(hit.collider.tag);
+                Debug.DrawLine(ray.origin, hit.point);
+                //Debug.Log("This is a slime");
+                slime = hit.rigidbody.transform;//saves the current slime position(grabbing the rigidbody will take how whole object that is moving)
+
+            }
+            else if (hit.collider.tag == "ground")
+            {
+
+                if (slime != null)
+                {
+                    //Debug.Log("ground hit");
+                    slime.position = new Vector3(hit.point.x, hit.point.y + 1f, hit.point.z);//replaces current slimes position with selected ground position to move to
+                                                                                             //set slime reference to null so that it doesnt keep the previous slime selected
+                    slime.rotation = originalRotation;
+                    slime = null;//forces player to select a slime again if wanted to be placed somewhere else
+                }
+            }
+        }
     }
 
     void OnDrawGizmos()

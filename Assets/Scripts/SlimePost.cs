@@ -10,6 +10,7 @@ public class SlimePost : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        
         if(other.gameObject.tag == "Slime")
         {
             //switch slimes target to be slimepost
@@ -18,9 +19,13 @@ public class SlimePost : MonoBehaviour
             var curSlime = other.GetComponent<SlimeMotor>();//works with small slime because they dont have child colliders to depend on
             if(curSlime != null)//if slime has slimemotor script
             {
-                curSlime.target = targetPost;//change slimes target
+                if (!curSlime.maxSize)
+                {
+                    curSlime.target = targetPost;//change slimes target
 
-                curSlime.focusedOnPost = true;
+                    curSlime.focusedOnPost = true;
+                }
+                
             }
         }
         else if (other.gameObject.tag == "MegaSlime")
@@ -31,9 +36,13 @@ public class SlimePost : MonoBehaviour
             var curSlime = other.transform.parent.GetComponent<SlimeMotor>();//works with finding the parent of child objects
             if (curSlime != null)//if slime has slimemotor script
             {
-                curSlime.target = targetPost;//change slimes target
+                if (!curSlime.maxSize)
+                {
+                    curSlime.target = targetPost;//change slimes target
 
-                curSlime.focusedOnPost = true;
+                    curSlime.focusedOnPost = true;
+                }
+                
             }
         }
     }
