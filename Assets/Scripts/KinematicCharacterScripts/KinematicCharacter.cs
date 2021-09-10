@@ -97,7 +97,7 @@ public class KinematicCharacter : MonoBehaviour
             Vector3 projectedPosition = player.transform.position + (velocity + input * speed) * Time.deltaTime;
             
             thisCollider.size = skinWidthSize;
-            Debug.Log("thiscollider.size: " + thisCollider.size);
+            //Debug.Log("thiscollider.size: " + thisCollider.size);
 
             if (thisCollider != null)
             {
@@ -131,9 +131,6 @@ public class KinematicCharacter : MonoBehaviour
                     //if player is gonna overlap with object
                     if (overlapped)
                     {
-                        //Debug.DrawRay(player.transform.position, direction * distance);
-                        //position = position + direction * distance
-
 
                         //                               (vector, planeNormal)
                         velocity = Vector3.ProjectOnPlane(velocity, direction);
@@ -163,7 +160,7 @@ public class KinematicCharacter : MonoBehaviour
                 }
 
                 thisCollider.size = originalSize;
-                Debug.Log("thiscollider.size: " + thisCollider.size);
+                //Debug.Log("thiscollider.size: " + thisCollider.size);
 
 
             }
