@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Jobs;
+using System;
 
 public class SlimeMotor : MonoBehaviour
 {
@@ -62,36 +63,26 @@ public class SlimeMotor : MonoBehaviour
             pointTimer = pointTimer - Time.deltaTime;
             if (!maxSize)
             {
-                if (pointTimer <= 0)
-                {
-                    happiness++;
-                    points++;
-                    pointTimer = setPointTimer;
-                    if (points > requiredPoints)
-                    {
-                        points = 0;
-                        gameObject.transform.localScale = new Vector3(happiness / 4, happiness / 4, happiness / 4);
-                        maxSize = true;
-                    }
-                }
+                SlimeGrowth();
+                
             }
-            
-
         }
+        SlimeMovement();
 
+    }
+
+    private void SlimeMovement()
+    {
         float dist = Vector3.Distance(target.position, transform.position);
-        if (dist > .7f)
+        if (dist > .2f)
         {
             atTarget = false;
-
-            
-
 
             //get the offset for distance between target and slime. normalize it to simplify it to 1, then multiply it by a horizontal force.
             Vector3 offset = (target.position - transform.position).normalized * jumpHorizontally;
             //set the y axis to a vertical force.
             offset.y = jumpVertically;
-            
+
 
             //slime jumps a certain amount of seconds
             tempJumpSec = tempJumpSec + Time.deltaTime;
@@ -111,37 +102,45 @@ public class SlimeMotor : MonoBehaviour
                     {
                         if (childSlime.shouldJump)
                         {
-                            Debug.Log("MegaJUMP");
+                            //Debug.Log("MegaJUMP");
                             var curSlime = transform.parent.GetComponent<SlimeMotor>();
                             curSlime.rb.AddForce(offset, ForceMode.Impulse);
                             tempJumpSec = 0;
                         }
                     }
-                    
+
                 }
-                
+
             }
 
         }
-        else if(dist <= .5f)
+        else if (dist <= .1f)
         {
-            
+
             if (atTarget == false)
             {
-               //Debug.Log("target reached");
+                //Debug.Log("target reached");
                 atTarget = true;
                 //rb.MovePosition(transform.position);
             }
 
         }
+    }
 
-        //if (grabbed)
-        //{
-        //    transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //}
-
-
-
+    public void SlimeGrowth()
+    {
+        if (pointTimer <= 0)
+        {
+            happiness++;
+            points++;
+            pointTimer = setPointTimer;
+            if (points > requiredPoints)
+            {
+                points = 0;
+                gameObject.transform.localScale = new Vector3(happiness / 4, happiness / 4, happiness / 4);
+                maxSize = true;
+            }
+        }
     }
 
     void OnDrawGizmosSelected()

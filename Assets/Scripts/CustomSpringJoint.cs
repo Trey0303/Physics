@@ -40,12 +40,12 @@ public class CustomSpringJoint : MonoBehaviour
 
         if (connectedRigidbody == null)//if there is no object connected
         {
-            Debug.Log("No rigidbody connected");
+            //Debug.Log("No rigidbody connected");
             restPosition = transform.position;
         }
         else//if there is a connect object
         {
-            Debug.Log("there is a rigidbody connected");
+            //Debug.Log("there is a rigidbody connected");
             restPosition = connectedRigidbody.transform.position;
         }
         
