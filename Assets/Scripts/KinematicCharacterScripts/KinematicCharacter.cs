@@ -23,12 +23,15 @@ public class KinematicCharacter : MonoBehaviour
 
     public bool playerCam;
 
+    LayerMask mask;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         velocity = rb.velocity;
         playerSize = player.transform.localScale;
+        mask = LayerMask.GetMask("Default");
     }
 
     private void Update()
@@ -39,7 +42,7 @@ public class KinematicCharacter : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    Debug.Log("Jump");
+                    //Debug.Log("Jump");
                     jump = true;
 
                     isGrounded = false;
@@ -82,7 +85,7 @@ public class KinematicCharacter : MonoBehaviour
             {
 
                 //collide/overlap Detection                                              Skin Width: Add this skin width when performing your collision tests. For example, if my KinematicCharacter has a BoxCollider that has a size of 1,1,1, then I should be testing with a box whose full-extents are 1.001, 1.001, 1.001 when calling Physics.OverlapBox.
-                Collider[] hitColliders = Physics.OverlapBox(projectedPosition, new Vector3(transform.localScale.x + skinWidth, transform.localScale.y + skinWidth, transform.localScale.z + skinWidth), Quaternion.identity);//Remember that Physics.OverlapBox asks for the half-extents so you'll need to divide the box's size by two before passing it along.
+                Collider[] hitColliders = Physics.OverlapBox(projectedPosition, new Vector3(transform.localScale.x + skinWidth, transform.localScale.y + skinWidth, transform.localScale.z + skinWidth), Quaternion.identity, mask);//Remember that Physics.OverlapBox asks for the half-extents so you'll need to divide the box's size by two before passing it along.
 
                 //Check when there is a new collider coming into contact with the box
                 for (int i = 0; i < hitColliders.Length; i++)
