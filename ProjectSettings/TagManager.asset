@@ -12,6 +12,7 @@ TagManager:
   - Gate
   - LeftGate
   - RightGate
+  - Platform
   layers:
   - Default
   - TransparentFX

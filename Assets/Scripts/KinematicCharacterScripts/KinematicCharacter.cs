@@ -30,6 +30,8 @@ public class KinematicCharacter : MonoBehaviour
 
     BoxCollider thisCollider;
 
+    RaycastHit hit;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,7 +76,25 @@ public class KinematicCharacter : MonoBehaviour
     void FixedUpdate()
     {
         if (playerCam)
-        { 
+        {
+            //player on platform
+            //bool grounded = (Physics.Raycast(transform.position, Vector3.down, out hit));
+
+            //if (grounded)
+            //{
+            //    if (Physics.Raycast(transform.position, Vector3.down, 2f) && hit.collider.CompareTag("Platform"))
+            //    {
+            //        //Debug.Log("Platform");
+            //        GameObject temp = GameObject.FindWithTag("Platform");
+
+            //        transform.parent.SetParent(temp.transform);
+            //    }
+            //    else
+            //    {
+            //        transform.parent.SetParent(null);
+            //    }
+            //}
+
             //update Velocity
             //player.transform.position += velocity * Time.deltaTime;
 
@@ -145,6 +165,9 @@ public class KinematicCharacter : MonoBehaviour
 
                             //Debug.Log("walkable slope");
                             isGrounded = true;
+                            
+
+
                         }
                         else//if slope too steep
                         {
@@ -167,8 +190,21 @@ public class KinematicCharacter : MonoBehaviour
             //Movement
             rb.MovePosition(projectedPosition);
         }
-            
-        
+    }
+    void OnCollisionEnter(Collision other)
+    {
+        Debug.Log("COLLISION");
+        if (gameObject.tag == "Platform")
+        {
+            transform.parent.SetParent(other.transform);
+        }
+    }
 
+    void OnCollisionExit(Collision other)
+    {
+        if (gameObject.tag == "Platform")
+        {
+            transform.parent.SetParent(null);
+        }
     }
 }

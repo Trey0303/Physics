@@ -14,7 +14,7 @@ public class SlimeMotor : MonoBehaviour
     public Transform tempTarget;
 
     //Quanternion myQuanternion;
-    public float speed = 5f;
+    //public float speed = 5f;
 
     //how strong the jump is vertically
     public float jumpVertically;
@@ -93,7 +93,7 @@ public class SlimeMotor : MonoBehaviour
 
                 if (grounded)
                 {
-                    Debug.Log("JUMP");
+                    //Debug.Log("JUMP");
                     //use offset to add force to rigidbody of slime
                     rb.AddForce(offset, ForceMode.Impulse);
                     tempJumpSec = 0;
