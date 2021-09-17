@@ -39,9 +39,11 @@ bool checkCircleCircle(glm::vec2 posA, circle circleA, glm::vec2 posB, circle ci
 
 bool checkCircleCircle(const glm::vec2& posA, const shape& shapeA, const glm::vec2& posB, const shape& shapeB);
 
+
 bool checkAABBAABB(glm::vec2 posA, aabb aabbA, glm::vec2 posB, aabb aabbB);
 
 bool checkAABBAABB(const glm::vec2& posA, const shape& shapeA, const glm::vec2& posB, const shape& shapeB);
+
 
 bool checkCircleAABB(glm::vec2 posA, circle circleA, glm::vec2 posB, aabb aabbB);
 

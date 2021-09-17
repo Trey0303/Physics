@@ -15,6 +15,8 @@ baseGame::baseGame() {
 	collMap[static_cast<collisionPair>(shapeType::CIRCLE | shapeType::CIRCLE)] = checkCircleCircle;
 
 	collMap[static_cast<collisionPair>(shapeType::AABB | shapeType::AABB)] = checkAABBAABB;
+
+	collMap[static_cast<collisionPair>(shapeType::CIRCLE | shapeType::AABB)] = checkCircleAABB;
 }
 
 void baseGame::init() {
@@ -92,10 +94,10 @@ void baseGame::draw() const {
 	BeginDrawing();
 
 	//DrawCircle(object.pos.x, object.pos.y, 15, BLUE);
+
 	for (int i = 0; i < objects.size(); i++) {
-		DrawRectangle(objects[i].pos.x, objects[i].pos.y, 25, 25, BLUE);
+		objects[i].draw();
 	}
-	//draw();
 
 	onDraw();
 	

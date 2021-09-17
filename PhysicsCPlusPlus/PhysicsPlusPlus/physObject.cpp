@@ -55,16 +55,16 @@ void physObject::useGravity(float forceOfGravity, bool gravity) {
 	}
 }
 
-void physObject::draw() {
+void physObject::draw() const{
 	switch(collider.type){
 		case shapeType::NONE:
 			DrawPixel(pos.x, pos.y, RED);
 			break;
 		case shapeType::CIRCLE:
-			DrawCircle(pos.x, pos.y, collider.circleData.radius, GREEN);
+			DrawCircle(pos.x, pos.y, collider.circleData.radius, BLUE);
 			break;
 		case shapeType::AABB:
-			DrawRectangle(pos.x, pos.y, collider.aabbData.width, collider.aabbData.height, YELLOW);
+			DrawRectangle(pos.x, pos.y, collider.aabbData.width, collider.aabbData.height, ORANGE);
 			break;
 		//case shapeType::MESH:
 		//	break;

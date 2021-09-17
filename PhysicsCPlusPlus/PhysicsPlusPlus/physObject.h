@@ -45,5 +45,5 @@ public:
 
 	void useGravity(float forceOfGravity, bool gravity);
 
-	void draw();
+	void draw() const;
 };
