@@ -1,4 +1,5 @@
 #include "physObject.h"
+#include <raylib\raylib.h>
 
 //Initializes our pos and vel to good default (zero'd out)
 physObject::physObject() {
@@ -55,18 +56,18 @@ void physObject::useGravity(float forceOfGravity, bool gravity) {
 }
 
 void physObject::draw() {
-	switch(collider){
+	switch(collider.type){
 		case shapeType::NONE:
 			DrawPixel(pos.x, pos.y, RED);
 			break;
 		case shapeType::CIRCLE:
-			DrawCircle(pos.x, pos.y, 15, GREEN);
+			DrawCircle(pos.x, pos.y, collider.circleData.radius, GREEN);
 			break;
 		case shapeType::AABB:
-			DrawRectangle(pos.x, pos.y, 15, YELLOW);
+			DrawRectangle(pos.x, pos.y, collider.aabbData.width, collider.aabbData.height, YELLOW);
 			break;
-		case shapeType::MESH:
-			break;
+		//case shapeType::MESH:
+		//	break;
 		default:
 			break;
 

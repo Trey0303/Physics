@@ -18,8 +18,10 @@ public:
 	/*float acceleration;
 	float force;*/
 
+
 	//Add a shape variable as a member of your physObject type.
 	shape collider;
+	//shapeType shape = shapeType::AABB;
 
 	//bool gravity = true;
 

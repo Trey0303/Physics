@@ -1,4 +1,5 @@
 #pragma once
+#include "glm/glm.hpp"
 
 #include <cstdint>
 struct circle {
@@ -6,19 +7,19 @@ struct circle {
 };
 
 struct aabb {
-	float length;
-	float width;
+	float width;//x
+	float height;//y
 };
 
-struct mesh {
-
-};
+//struct mesh {
+//
+//};
 
 enum class shapeType : uint8_t {
 	NONE = 0,
 	CIRCLE = 1 << 0,
-	AABB = 2 << 1,
-	MESH = 3 << 2
+	AABB = 1 << 1,
+	/*MESH = 1 << 2*/
 };
 
 struct shape
@@ -27,9 +28,21 @@ struct shape
 	shapeType type;
 
 	//add new types of shapes to this anonymous union
-	union {
+	union {//colliderData
 		circle circleData;
 		aabb aabbData;
-		mesh meshData;
+		//mesh meshData;
 	};
 };
+
+bool checkCircleCircle(glm::vec2 posA, circle circleA, glm::vec2 posB, circle circleB);
+
+bool checkCircleCircle(const glm::vec2& posA, const shape& shapeA, const glm::vec2& posB, const shape& shapeB);
+
+bool checkAABBAABB(glm::vec2 posA, aabb aabbA, glm::vec2 posB, aabb aabbB);
+
+bool checkAABBAABB(const glm::vec2& posA, const shape& shapeA, const glm::vec2& posB, const shape& shapeB);
+
+bool checkCircleAABB(glm::vec2 posA, circle circleA, glm::vec2 posB, aabb aabbB);
+
+bool checkCircleAABB(const glm::vec2& posA, const shape& shapeA, const glm::vec2& posB, const shape& shapeB);

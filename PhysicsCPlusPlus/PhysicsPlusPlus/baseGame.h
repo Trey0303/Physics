@@ -2,12 +2,23 @@
 
 #include "physObject.h"
 #include <vector>
+#include <unordered_map>
 
 class baseGame
 {
-    
+    //a type alias to make things more readable
+    using collisionPair = uint8_t;
+    //the function signature any for collision test
+    using collisionFunc = bool(*)(const glm::vec2&, const shape&, const glm::vec2&, const shape&);
+    //a map that takes a collision pair and returns the correct function to call
+    using collisionMap = std::unordered_map<collisionPair, collisionFunc>;
     
 protected:
+
+    collisionMap collMap;
+
+    std::vector<physObject> objects;
+    
     //The amount of time since the last fixed tick
     float accumulatedFixedTime;
 
@@ -25,7 +36,6 @@ protected:
     // Called internally when game-specifc clean-up occurs
     void virtual onExit() { }
 
-    std::vector<physObject> objects;
     //physObject object;
 
 public:
