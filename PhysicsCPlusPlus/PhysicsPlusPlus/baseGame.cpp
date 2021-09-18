@@ -77,6 +77,7 @@ void baseGame::tickFixed() {
 			
 			if (collision) {
 				std::cout << "COLLISION OCCURRED AT " << GetTime() << " !" << std::endl;
+				
 			}
 		}
 	}
