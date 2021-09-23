@@ -18,7 +18,12 @@ baseGame::baseGame() {
 
 	collMap[static_cast<collisionPair>(shapeType::CIRCLE | shapeType::AABB)] = checkCircleAABB;
 
+
 	depenMap[static_cast<collisionPair>(shapeType::CIRCLE | shapeType::CIRCLE)] = depenetrateCircleCircle;
+
+	depenMap[static_cast<collisionPair>(shapeType::AABB | shapeType::AABB)] = depenetrateAABBAABB;
+
+	//depenMap[static_cast<collisionPair>(shapeType::CIRCLE | shapeType::AABB)] = depenetrateCircleAABB;
 }
 
 void baseGame::init() {
@@ -42,10 +47,15 @@ void baseGame::tick() {
 
 void baseGame::tickFixed() {
 	//std::cout << " tickFixed";
-	accumulatedFixedTime = 0;
+	accumulatedFixedTime = accumulatedFixedTime - targetFixedStep;
 
 	//object.addForce(glm::vec2(15.0f, 4.0f));
 
+	//update all physics bodies in the project
+	for (int i = 0; i < objects.size(); i++) {
+		objects[i].tickPhys(targetFixedStep);
+	}
+	
 
 	for (size_t i = 0; i < objects.size(); ++i)
 	{
@@ -78,7 +88,7 @@ void baseGame::tickFixed() {
 											  objects[rhs].pos, objects[rhs].collider);
 			
 			if (collision) {
-				std::cout << "COLLISION OCCURRED AT " << GetTime() << " !" << std::endl;
+				//std::cout << "COLLISION OCCURRED AT " << GetTime() << " !" << std::endl;
 				
 				float pen = 0.0f;
 				glm::vec2 normal = depenMap[pairing](objects[lhs].pos,      //lhs position
@@ -88,15 +98,11 @@ void baseGame::tickFixed() {
 													pen);                   //assign pen
 
 				resolvePhysBodies(objects[lhs], objects[rhs], 1.0f, normal, pen);
+				std::cout <<  pen << " !" << std::endl;
 			}
 		}
 	}
 
-	//update all physics bodies in the project
-	for (int i = 0; i < objects.size(); i++) {
-		objects[i].tickPhys(targetFixedStep);
-	}
-	
 	onTickFixed();
 }
 

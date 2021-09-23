@@ -6,12 +6,18 @@ physObject::physObject() {
 	pos = glm::vec2(0, 0);
     vel = glm::vec2(0, 0);
 	totalForces = glm::vec2(0, 0);
-
+	gravityOn = false;
+	forceOfGravitySet = 0;
 	mass = 2.0f;
 }
 
 //Integrates velocity into position with the provided time step (delta)
 void physObject::tickPhys(float delta) {
+	
+	if (gravityOn) {
+		vel.y += forceOfGravitySet;
+	}
+	
 	vel += totalForces * delta;
 	totalForces = glm::vec2(0, 0);
 	
@@ -50,9 +56,10 @@ void physObject::addAccel(glm::vec2 force)
 }
 
 void physObject::useGravity(float forceOfGravity, bool gravity) {
-	if (gravity) {
-		vel.y += forceOfGravity;
-	}
+	gravityOn = gravity;
+	forceOfGravitySet = forceOfGravity;
+    vel.y += forceOfGravitySet;
+
 }
 
 void physObject::draw() const{
@@ -98,37 +105,21 @@ void resolvePhysBodies(physObject& lhs, physObject& rhs, float elasticity, const
 										elasticity, normal);
 
 	glm::vec2 impulse = impulseMag * normal;
-
-	if (lhs.collider.type == shapeType::AABB ) {//check if lhs is a aabb
-		if (lhs.collider.aabbData.isStatic == false) {//check if NOT static
-			// depenetrate (aka separate) the two objects
-			pen *= .51f;
-			glm::vec2 correction = normal * pen;
-			lhs.pos += correction;
-			// apply resolution forces to both objects
-			lhs.addImpulse(correction);
-			
-		}
-	}
-	else if (rhs.collider.type == shapeType::AABB) {//check if rhs is a aabb
-		if (rhs.collider.aabbData.isStatic == false) {//check if NOT static
-			glm::vec2 correction = normal * pen;
-			rhs.pos -= correction;
-
-			rhs.addImpulse(-correction); // remember: this gets an equal but opposite force
-
-		}
-	}
-	else if(lhs.collider.type != shapeType::AABB && rhs.collider.type != shapeType::AABB){
-		// depenetrate (aka separate) the two objects
 		pen *= .51f;
+
+	if (!lhs.isStatic) {//check if NOT static
+			// depenetrate (aka separate) the two objects
 		glm::vec2 correction = normal * pen;
 		lhs.pos += correction;
-		rhs.pos -= correction;
-
 		// apply resolution forces to both objects
 		lhs.addImpulse(correction);
-		rhs.addImpulse(-correction); // remember: this gets an equal but opposite force
+
 	}
-	
+	if (!rhs.isStatic) {//check if NOT static
+		glm::vec2 correction = normal * pen;
+		rhs.pos -= correction;
+
+		rhs.addImpulse(-correction); // remember: this gets an equal but opposite force
+
+	}
 }

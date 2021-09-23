@@ -1,36 +1,6 @@
-﻿  physObject.cpp
-C:\Users\s209058\source\repos\Physics\PhysicsCPlusPlus\PhysicsPlusPlus\physObject.cpp(61,24): warning C4244: 'argument': conversion from 'const T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\s209058\source\repos\Physics\PhysicsCPlusPlus\PhysicsPlusPlus\physObject.cpp(61,17): warning C4244: 'argument': conversion from 'const T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\s209058\source\repos\Physics\PhysicsCPlusPlus\PhysicsPlusPlus\physObject.cpp(64,25): warning C4244: 'argument': conversion from 'const T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\s209058\source\repos\Physics\PhysicsCPlusPlus\PhysicsPlusPlus\physObject.cpp(64,18): warning C4244: 'argument': conversion from 'const T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\s209058\source\repos\Physics\PhysicsCPlusPlus\PhysicsPlusPlus\physObject.cpp(67,74): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
-C:\Users\s209058\source\repos\Physics\PhysicsCPlusPlus\PhysicsPlusPlus\physObject.cpp(67,49): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
-C:\Users\s209058\source\repos\Physics\PhysicsCPlusPlus\PhysicsPlusPlus\physObject.cpp(67,28): warning C4244: 'argument': conversion from 'const T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\s209058\source\repos\Physics\PhysicsCPlusPlus\PhysicsPlusPlus\physObject.cpp(67,21): warning C4244: 'argument': conversion from 'const T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
+﻿  baseGame.cpp
+C:\Users\s209058\source\repos\Physics\PhysicsCPlusPlus\PhysicsPlusPlus\baseGame.cpp(55,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\s209058\source\repos\Physics\PhysicsCPlusPlus\PhysicsPlusPlus\baseGame.cpp(115,20): warning C4018: '<': signed/unsigned mismatch
   raylib.lib(core.obj) : MSIL .netmodule or module compiled with /GL found; restarting link with /LTCG; add /LTCG to the link command line to improve linker performance
 LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/LTCG' specification
 LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library

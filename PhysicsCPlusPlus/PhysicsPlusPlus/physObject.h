@@ -13,6 +13,11 @@ public:
 	//The velocity of the object
 	glm::vec2 vel;
 
+	bool isStatic;
+
+	bool gravityOn;
+
+	float forceOfGravitySet;
 
 	float mass;
 	/*float acceleration;
