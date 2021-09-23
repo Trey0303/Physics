@@ -9,6 +9,7 @@ struct circle {
 struct aabb {
 	float width;//x
 	float height;//y
+	bool isStatic;
 };
 
 //struct mesh {
@@ -51,4 +52,6 @@ bool checkCircleAABB(glm::vec2 posA, circle circleA, glm::vec2 posB, aabb aabbB)
 bool checkCircleAABB(const glm::vec2& posA, const shape& shapeA, const glm::vec2& posB, const shape& shapeB);
 
 glm::vec2 depenetrateCircleCircle(const glm::vec2& posA, const shape &shapeA, const glm::vec2& posB, const shape &shapeB, float &pen);
+
+glm::vec2 depenetrateAABBAABB(const glm::vec2& posA, const shape& shapeA, const glm::vec2& posB, const shape& shapeB, float& pen);
 

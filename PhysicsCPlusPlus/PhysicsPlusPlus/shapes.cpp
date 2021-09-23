@@ -73,3 +73,13 @@ glm::vec2 depenetrateCircleCircle(const glm::vec2& posA, const shape &shapeA, co
 	return glm::normalize(offset);
 
 }
+
+//collision normal and penetration depth between AABBs
+glm::vec2 depenetrateAABBAABB(const glm::vec2& posA, const shape& shapeA, const glm::vec2& posB, const shape& shapeB, float& pen)
+{
+	
+	glm::vec2 offset = posA - posB;
+
+	
+	return glm::normalize(offset);
+}

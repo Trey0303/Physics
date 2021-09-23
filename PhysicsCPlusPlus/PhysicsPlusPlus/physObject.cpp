@@ -99,14 +99,36 @@ void resolvePhysBodies(physObject& lhs, physObject& rhs, float elasticity, const
 
 	glm::vec2 impulse = impulseMag * normal;
 
+	if (lhs.collider.type == shapeType::AABB ) {//check if lhs is a aabb
+		if (lhs.collider.aabbData.isStatic == false) {//check if NOT static
+			// depenetrate (aka separate) the two objects
+			pen *= .51f;
+			glm::vec2 correction = normal * pen;
+			lhs.pos += correction;
+			// apply resolution forces to both objects
+			lhs.addImpulse(correction);
+			
+		}
+	}
+	else if (rhs.collider.type == shapeType::AABB) {//check if rhs is a aabb
+		if (rhs.collider.aabbData.isStatic == false) {//check if NOT static
+			glm::vec2 correction = normal * pen;
+			rhs.pos -= correction;
 
-	// depenetrate (aka separate) the two objects
-	pen *= .51f;
-	glm::vec2 correction = normal * pen;
-	lhs.pos += correction;
-	rhs.pos -= correction;
+			rhs.addImpulse(-correction); // remember: this gets an equal but opposite force
 
-	// apply resolution forces to both objects
-	lhs.addImpulse(correction);
-	rhs.addImpulse(-correction); // remember: this gets an equal but opposite force
+		}
+	}
+	else if(lhs.collider.type != shapeType::AABB && rhs.collider.type != shapeType::AABB){
+		// depenetrate (aka separate) the two objects
+		pen *= .51f;
+		glm::vec2 correction = normal * pen;
+		lhs.pos += correction;
+		rhs.pos -= correction;
+
+		// apply resolution forces to both objects
+		lhs.addImpulse(correction);
+		rhs.addImpulse(-correction); // remember: this gets an equal but opposite force
+	}
+	
 }
