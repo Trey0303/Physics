@@ -17,6 +17,8 @@ baseGame::baseGame() {
 	collMap[static_cast<collisionPair>(shapeType::AABB | shapeType::AABB)] = checkAABBAABB;
 
 	collMap[static_cast<collisionPair>(shapeType::CIRCLE | shapeType::AABB)] = checkCircleAABB;
+
+	depenMap[static_cast<collisionPair>(shapeType::CIRCLE | shapeType::CIRCLE)] = depenetrateCircleCircle;
 }
 
 void baseGame::init() {
@@ -78,6 +80,14 @@ void baseGame::tickFixed() {
 			if (collision) {
 				std::cout << "COLLISION OCCURRED AT " << GetTime() << " !" << std::endl;
 				
+				float pen = 0.0f;
+				glm::vec2 normal = depenMap[pairing](objects[lhs].pos,      //lhs position
+													objects[lhs].collider,  //lhs collider
+													objects[rhs].pos,       //rhs position
+													objects[rhs].collider,  //rhs collision
+													pen);                   //assign pen
+
+				resolvePhysBodies(objects[lhs], objects[rhs], 1.0f, normal, pen);
 			}
 		}
 	}

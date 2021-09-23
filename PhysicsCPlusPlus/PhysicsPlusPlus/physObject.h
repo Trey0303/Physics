@@ -40,3 +40,8 @@ public:
 
 	void draw() const;
 };
+
+//given two phyics objects return force needed to be applied
+float resolveCollision(glm::vec2 posA, glm::vec2 velA, float massA, glm::vec2 posB, glm::vec2 velB, float massB, float elasticity, glm::vec2 normal);
+
+void resolvePhysBodies(physObject &lhs, physObject &rhs, float elasticity, const glm::vec2& normal, float pen);

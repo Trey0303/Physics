@@ -37,6 +37,7 @@ struct shape
 
 bool checkCircleCircle(glm::vec2 posA, circle circleA, glm::vec2 posB, circle circleB);
 
+//references(&) cost less than copying original
 bool checkCircleCircle(const glm::vec2& posA, const shape& shapeA, const glm::vec2& posB, const shape& shapeB);
 
 
@@ -48,3 +49,6 @@ bool checkAABBAABB(const glm::vec2& posA, const shape& shapeA, const glm::vec2& 
 bool checkCircleAABB(glm::vec2 posA, circle circleA, glm::vec2 posB, aabb aabbB);
 
 bool checkCircleAABB(const glm::vec2& posA, const shape& shapeA, const glm::vec2& posB, const shape& shapeB);
+
+glm::vec2 depenetrateCircleCircle(const glm::vec2& posA, const shape &shapeA, const glm::vec2& posB, const shape &shapeB, float &pen);
+

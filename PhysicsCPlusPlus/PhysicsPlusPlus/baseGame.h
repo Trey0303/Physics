@@ -4,18 +4,28 @@
 #include <vector>
 #include <unordered_map>
 
+//a type alias to make things more readable
+using collisionPair = uint8_t;
+//the function signature any for collision test
+using collisionFunc = bool(*)(const glm::vec2&, const shape&, const glm::vec2&, const shape&);
+//a map that takes a collision pair and returns the correct function to call
+using collisionMap = std::unordered_map<collisionPair, collisionFunc>;
+
+//function signature for resolution functions
+using depenetrationFunc = glm::vec2(*)(const glm::vec2 & posA, const shape & shapeA, const glm::vec2 & posB, const shape & shapeB, float& pen);
+// map for associating pairs of collision shapes with their resolution functions
+using depenetrationMap = std::unordered_map < collisionPair, depenetrationFunc >;
+
 class baseGame
 {
-    //a type alias to make things more readable
-    using collisionPair = uint8_t;
-    //the function signature any for collision test
-    using collisionFunc = bool(*)(const glm::vec2&, const shape&, const glm::vec2&, const shape&);
-    //a map that takes a collision pair and returns the correct function to call
-    using collisionMap = std::unordered_map<collisionPair, collisionFunc>;
+    collisionMap collMap;
+
+    // stores functions for resolving collisions between any two types
+    depenetrationMap depenMap;
+
     
 protected:
 
-    collisionMap collMap;
 
     std::vector<physObject> objects;
     
