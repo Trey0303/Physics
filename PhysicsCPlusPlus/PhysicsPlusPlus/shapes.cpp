@@ -46,10 +46,10 @@ bool checkAABBAABB(const glm::vec2& posA, const shape& shapeA, const glm::vec2& 
 bool checkCircleAABB(glm::vec2 posA, circle circleA, glm::vec2 posB, aabb aabbB) {
 	//clamp the center of the circle to the boundraries of the aabb
 	//get center point of circle
-	glm::vec2 center(posA + circleA.radius);
+	glm::vec2 center(posA);
 	//get center of aabb
 	glm::vec2 aabb_half_extent(aabbB.width / 2.0f, aabbB.height / 2.0f);
-	glm::vec2 aabb_center(posB.x + aabbB.width, posB.y + aabbB.height);
+	glm::vec2 aabb_center(posB.x + aabbB.width / 2.0f, posB.y + aabbB.height / 2.0f);
 
 	//get difference vector between both centers
 	glm::vec2 difference = center - aabb_center;
@@ -151,10 +151,10 @@ glm::vec2 depenetrateCircleAABB(const glm::vec2& posA, const shape& shapeA, cons
 	glm::vec2 normal;
 	//clamp the center of the circle to the boundraries of the aabb
 	//get center point of circle
-	glm::vec2 center(posA + radius);
+	glm::vec2 center(posA);
 	//get center of aabb
 	glm::vec2 aabb_half_extent(shapeB.aabbData.width / 2.0f, shapeB.aabbData.height / 2.0f);
-	glm::vec2 aabb_center(posB.x + shapeB.aabbData.width, posB.y + shapeB.aabbData.height);
+	glm::vec2 aabb_center(posB.x + shapeB.aabbData.width / 2.0f, posB.y + shapeB.aabbData.height / 2.0f);
 
 	//get difference vector between both centers
 	glm::vec2 difference = center - aabb_center;
@@ -168,9 +168,16 @@ glm::vec2 depenetrateCircleAABB(const glm::vec2& posA, const shape& shapeA, cons
 	//subtracted by a vector to the closest point on the AABB
 	normal = difference - closest;
 
+	difference = center - closest;
 	//pen = circleRadius - (circleCenter - closestPointOnAABB);
-	pen = radius - (center - closest);
+	pen = radius - (glm::length(difference));
 
-	
+	//clamp center of circle to the edge of the AABB along the edge closest to the circles center
+	glm::vec2 centerCircleClamped = glm::clamp(difference, -radius, radius);
+
+	//flip the collision normal(so it points away from the AABB instead of the center)
+	normal = -normal;
+
+	//normalize it
 	return glm::normalize(normal);
 }

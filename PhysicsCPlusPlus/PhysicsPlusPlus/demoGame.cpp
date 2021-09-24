@@ -24,7 +24,7 @@ void demoGame::onTick() {
 		//newObject.addVelocity(glm::vec2(rand() % 100, rand() % 100));
 		//newObject.addImpulse(glm::vec2(100, 100));
 		//newObject.addAccel(glm::vec2(rand() % 100 + -100, rand() % 100 + -100));
-		//newObject.useGravity(100.0f, false);
+		newObject.useGravity(100.0f, false);
 		objects.push_back(newObject);
 	}
 

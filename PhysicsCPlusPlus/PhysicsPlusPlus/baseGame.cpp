@@ -88,7 +88,7 @@ void baseGame::tickFixed() {
 											  objects[rhs].pos, objects[rhs].collider);
 			
 			if (collision) {
-				//std::cout << "COLLISION OCCURRED AT " << GetTime() << " !" << std::endl;
+				std::cout << "COLLISION OCCURRED AT " << GetTime() << " !" << std::endl;
 				
 				float pen = 0.0f;
 				glm::vec2 normal = depenMap[pairing](objects[lhs].pos,      //lhs position
