@@ -1,7 +1,41 @@
 ﻿  baseGame.cpp
-C:\Users\s209058\source\repos\Physics\PhysicsCPlusPlus\PhysicsPlusPlus\baseGame.cpp(26,78): error C2065: 'depenetrateCircleAABB': undeclared identifier
 C:\Users\s209058\source\repos\Physics\PhysicsCPlusPlus\PhysicsPlusPlus\baseGame.cpp(55,20): warning C4018: '<': signed/unsigned mismatch
 C:\Users\s209058\source\repos\Physics\PhysicsCPlusPlus\PhysicsPlusPlus\baseGame.cpp(115,20): warning C4018: '<': signed/unsigned mismatch
+  demoGame.cpp
+  main.cpp
+  physObject.cpp
+C:\Users\s209058\source\repos\Physics\PhysicsCPlusPlus\PhysicsPlusPlus\physObject.cpp(68,24): warning C4244: 'argument': conversion from 'const T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\s209058\source\repos\Physics\PhysicsCPlusPlus\PhysicsPlusPlus\physObject.cpp(68,17): warning C4244: 'argument': conversion from 'const T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\s209058\source\repos\Physics\PhysicsCPlusPlus\PhysicsPlusPlus\physObject.cpp(71,25): warning C4244: 'argument': conversion from 'const T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\s209058\source\repos\Physics\PhysicsCPlusPlus\PhysicsPlusPlus\physObject.cpp(71,18): warning C4244: 'argument': conversion from 'const T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\s209058\source\repos\Physics\PhysicsCPlusPlus\PhysicsPlusPlus\physObject.cpp(74,74): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+C:\Users\s209058\source\repos\Physics\PhysicsCPlusPlus\PhysicsPlusPlus\physObject.cpp(74,49): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+C:\Users\s209058\source\repos\Physics\PhysicsCPlusPlus\PhysicsPlusPlus\physObject.cpp(74,28): warning C4244: 'argument': conversion from 'const T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\s209058\source\repos\Physics\PhysicsCPlusPlus\PhysicsPlusPlus\physObject.cpp(74,21): warning C4244: 'argument': conversion from 'const T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
   shapes.cpp
 C:\Users\s209058\source\repos\Physics\PhysicsCPlusPlus\PhysicsPlusPlus\shapes.cpp(172,35): error C2440: '=': cannot convert from 'glm::vec<2,float,0>' to 'float'
 C:\Users\s209058\source\repos\Physics\PhysicsCPlusPlus\PhysicsPlusPlus\shapes.cpp(172,15): message : No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called

@@ -4132,7 +4132,7 @@ MonoBehaviour:
   - {fileID: 1873256389}
   - {fileID: 300610888}
   curWaypoint: 0
-  speed: 0
+  speed: 1.1
   platformRB: {fileID: 855882975}
 --- !u!65 &855882971
 BoxCollider:
