@@ -23,7 +23,7 @@ baseGame::baseGame() {
 
 	depenMap[static_cast<collisionPair>(shapeType::AABB | shapeType::AABB)] = depenetrateAABBAABB;
 
-	//depenMap[static_cast<collisionPair>(shapeType::CIRCLE | shapeType::AABB)] = depenetrateCircleAABB;
+	depenMap[static_cast<collisionPair>(shapeType::CIRCLE | shapeType::AABB)] = depenetrateCircleAABB;
 }
 
 void baseGame::init() {

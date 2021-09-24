@@ -146,28 +146,31 @@ glm::vec2 depenetrateAABBAABB(const glm::vec2& posA, const shape& shapeA, const 
 	return glm::normalize(normal);
 }
 
-//glm::vec2 depenetrateCircleAABB(const glm::vec2& posA, const shape& shapeA, const glm::vec2& posB, const shape& shapeB, float& pen) {
-//	//float radius = shapeA.circleData.radius;
-//	////clamp the center of the circle to the boundraries of the aabb
-//	////get center point of circle
-//	//glm::vec2 center(posA + radius);
-//	////get center of aabb
-//	//glm::vec2 aabb_half_extent(shapeB.aabbData.width / 2.0f, shapeB.aabbData.height / 2.0f);
-//	//glm::vec2 aabb_center(posB.x + shapeB.aabbData.width, posB.y + shapeB.aabbData.height);
-//
-//	////get difference vector between both centers
-//	//glm::vec2 difference = center - aabb_center;
-//	////                              value    ,    min           ,   max
-//	//glm::vec2 clamped = glm::clamp(difference, -aabb_half_extent, aabb_half_extent);
-//
-//	////add clamped value to aabb_center and we get the value of box closest to circle
-//	//glm::vec2 closest = aabb_center + clamped;
-//
-//
-//	////pen = circleRadius - (circleCenter - closestPointOnAABB);
-//	//difference = closest - center;
-//	//pen = radius - difference;
-//
-//	//
-//	//return glm::normalize(difference);
-//}
+glm::vec2 depenetrateCircleAABB(const glm::vec2& posA, const shape& shapeA, const glm::vec2& posB, const shape& shapeB, float& pen) {
+	float radius = shapeA.circleData.radius;
+	glm::vec2 normal;
+	//clamp the center of the circle to the boundraries of the aabb
+	//get center point of circle
+	glm::vec2 center(posA + radius);
+	//get center of aabb
+	glm::vec2 aabb_half_extent(shapeB.aabbData.width / 2.0f, shapeB.aabbData.height / 2.0f);
+	glm::vec2 aabb_center(posB.x + shapeB.aabbData.width, posB.y + shapeB.aabbData.height);
+
+	//get difference vector between both centers
+	glm::vec2 difference = center - aabb_center;
+	//                              value    ,    min           ,   max
+	glm::vec2 clamped = glm::clamp(difference, -aabb_half_extent, aabb_half_extent);
+
+	//add clamped value to aabb_center and we get the value of box closest to circle
+	glm::vec2 closest = aabb_center + clamped;
+
+	//The collision normal is the translation vector from A to B 
+	//subtracted by a vector to the closest point on the AABB
+	normal = difference - closest;
+
+	//pen = circleRadius - (circleCenter - closestPointOnAABB);
+	pen = radius - (center - closest);
+
+	
+	return glm::normalize(normal);
+}
