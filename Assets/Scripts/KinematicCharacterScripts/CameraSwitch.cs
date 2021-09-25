@@ -38,6 +38,10 @@ public class CameraSwitch : MonoBehaviour
         {
             SwapCam();
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     private void hideText()

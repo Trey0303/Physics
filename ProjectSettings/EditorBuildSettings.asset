@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/slime.unity
+    guid: 94eb73b3b138a224288b93ca1f6690f6
   m_configObjects: {}

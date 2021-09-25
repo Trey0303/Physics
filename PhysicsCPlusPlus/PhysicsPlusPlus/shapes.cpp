@@ -49,7 +49,7 @@ bool checkCircleAABB(glm::vec2 posA, circle circleA, glm::vec2 posB, aabb aabbB)
 	glm::vec2 center(posA);
 	//get center of aabb
 	glm::vec2 aabb_half_extent(aabbB.width / 2.0f, aabbB.height / 2.0f);
-	glm::vec2 aabb_center(posB.x + aabbB.width / 2.0f, posB.y + aabbB.height / 2.0f);
+	glm::vec2 aabb_center(posB.x + (aabbB.width / 2.0f), posB.y + (aabbB.height / 2.0f));
 
 	//get difference vector between both centers
 	glm::vec2 difference = center - aabb_center;
@@ -154,7 +154,7 @@ glm::vec2 depenetrateCircleAABB(const glm::vec2& posA, const shape& shapeA, cons
 	glm::vec2 center(posA);
 	//get center of aabb
 	glm::vec2 aabb_half_extent(shapeB.aabbData.width / 2.0f, shapeB.aabbData.height / 2.0f);
-	glm::vec2 aabb_center(posB.x + shapeB.aabbData.width / 2.0f, posB.y + shapeB.aabbData.height / 2.0f);
+	glm::vec2 aabb_center(posB.x + (shapeB.aabbData.width / 2.0f), posB.y + (shapeB.aabbData.height / 2.0f));
 
 	//get difference vector between both centers
 	glm::vec2 difference = center - aabb_center;
@@ -162,22 +162,48 @@ glm::vec2 depenetrateCircleAABB(const glm::vec2& posA, const shape& shapeA, cons
 	glm::vec2 clamped = glm::clamp(difference, -aabb_half_extent, aabb_half_extent);
 
 	//add clamped value to aabb_center and we get the value of box closest to circle
-	glm::vec2 closest = aabb_center + clamped;
-
-	//The collision normal is the translation vector from A to B 
-	//subtracted by a vector to the closest point on the AABB
-	normal = difference - closest;
+	glm::vec2 closest = aabb_center + clamped ;
 
 	difference = center - closest;
-	//pen = circleRadius - (circleCenter - closestPointOnAABB);
-	pen = radius - (glm::length(difference));
+		
+	
+	if (center.x > posB.x && center.x < posB.x + shapeB.aabbData.width &&
+		center.y > posB.y && center.y < posB.y + shapeB.aabbData.height) {//circle center is inside aabb
+		//direction between circle and box
+		glm::vec2 offset = center - aabb_center;
 
-	//clamp center of circle to the edge of the AABB along the edge closest to the circles center
-	glm::vec2 centerCircleClamped = glm::clamp(difference, -radius, radius);
+		//take the absolute value of offset
+		glm::vec2 overlap = aabb_half_extent - abs(offset);
 
-	//flip the collision normal(so it points away from the AABB instead of the center)
-	normal = -normal;
+		//which axis on the overlap is smaller
+		if (overlap.x < overlap.y) {
+			pen = abs(offset).x;
+			if (offset.x < 0) {
+				normal = glm::vec2(-1, 0);
+			}
+			else {
+				normal = glm::vec2(1, 0);
+			}
 
+		}
+		else {
+			pen = offset.y;
+			if (offset.y < 0) {
+				normal = glm::vec2(0, -1);
+			}
+			else {
+				normal = glm::vec2(0, 1);
+			}
+		}
+	}
+	else {//if outside the aabb
+		//The collision normal is the translation vector from A to B 
+		//subtracted by a vector to the closest point on the AABB
+		normal = glm::normalize(difference);
+
+		//pen = circleRadius - (circleCenter - closestPointOnAABB);
+		pen = radius - (glm::length(difference));
+	}
 	//normalize it
 	return glm::normalize(normal);
 }
