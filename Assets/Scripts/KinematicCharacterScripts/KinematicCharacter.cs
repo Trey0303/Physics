@@ -191,20 +191,20 @@ public class KinematicCharacter : MonoBehaviour
             rb.MovePosition(projectedPosition);
         }
     }
-    void OnCollisionEnter(Collision other)
-    {
-        Debug.Log("COLLISION");
-        if (gameObject.tag == "Platform")
-        {
-            transform.parent.SetParent(other.transform);
-        }
-    }
+    //void OnCollisionEnter(Collision other)
+    //{
+    //    Debug.Log("COLLISION");
+    //    if (gameObject.tag == "Platform")
+    //    {
+    //        transform.parent.SetParent(other.transform);
+    //    }
+    //}
 
-    void OnCollisionExit(Collision other)
-    {
-        if (gameObject.tag == "Platform")
-        {
-            transform.parent.SetParent(null);
-        }
-    }
+    //void OnCollisionExit(Collision other)
+    //{
+    //    if (gameObject.tag == "Platform")
+    //    {
+    //        transform.parent.SetParent(null);
+    //    }
+    //}
 }

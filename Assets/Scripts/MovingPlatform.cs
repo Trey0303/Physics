@@ -10,7 +10,7 @@ public class MovingPlatform : MonoBehaviour
 
     public float speed = 3;
 
-    public Rigidbody platformRB;
+    //public Rigidbody platformRB;
 
     // Start is called before the first frame update
     void Start()
